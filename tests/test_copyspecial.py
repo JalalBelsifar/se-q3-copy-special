@@ -30,6 +30,7 @@ SPL_REGEX = re.compile(r'__(\w+)__')
 
 class RandomFileSet:
     """Creates a set of special/notspecial files in a random temp dir"""
+
     def __init__(self):
         self.tmp_dir, self.file_list = self.random_fileset()
         self.abs_file_list = [
@@ -51,7 +52,7 @@ class RandomFileSet:
             prefix
             + "".join(random.sample(string.ascii_lowercase, size))
             + suffix
-            )
+        )
         return filename
 
     def random_fileset(self):
@@ -89,11 +90,11 @@ class TestCopyspecial(unittest.TestCase):
             os.path.abspath(os.path.join(os.getcwd(), f))
             for f in os.listdir('.')
             if SPL_REGEX.search(f)
-            ]
+        ]
         self.assertIsInstance(
             actual_path_list, list,
             "get_special_paths is not returning a list"
-            )
+        )
         self.assertListEqual(actual_path_list, expected_path_list)
 
     def test_get_special_paths_2(self):
@@ -102,13 +103,13 @@ class TestCopyspecial(unittest.TestCase):
         self.assertIsInstance(
             actual_path_list, list,
             "get_special_paths is not returning a list"
-            )
+        )
         a = sorted(actual_path_list)
         b = sorted(self.rfs.spl_file_list)
         self.assertListEqual(
             a, b,
             "Returned path list does not match expected path list"
-            )
+        )
 
     def test_copy_to(self):
         """Checking the copy_to function"""
@@ -136,7 +137,7 @@ class TestCopyspecial(unittest.TestCase):
         self.assertEqual(
             sorted(dest_files), sorted(self.rfs.file_list),
             "original files are not being zipped"
-            )
+        )
         self.clean(zip_name)
 
     def test_main_print(self):
@@ -195,7 +196,7 @@ class TestCopyspecial(unittest.TestCase):
         self.assertNotEqual(
             self.module.__author__, "???",
             "Author string is not completed"
-            )
+        )
 
 
 if __name__ == '__main__':
